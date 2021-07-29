@@ -22,7 +22,7 @@ app.use("/details", detailsRoute);
 
 const URL = process.env.MONGODB_URL || process.env.DB_URL;
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV == "production") {
   app.use(express.static("client/build"));
 }
 
