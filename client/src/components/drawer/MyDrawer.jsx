@@ -1,115 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
+import { useStyles } from "./styles";
+import WhiteNavDrawer from "./WhiteNavDrawer";
+import TransparentNavDrawer from "./TransparentNavDrawer";
+import { SwipeableDrawer, List, ListItem } from "@material-ui/core";
 
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  Button,
-  SwipeableDrawer,
-  List,
-  ListItem,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
-
-import MenuIcon from "@material-ui/icons/Menu";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import HomeIcon from "@material-ui/icons/Home";
 
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    zIndex: theme.zIndex.appBar,
-    boxShadow: "none",
-    [theme.breakpoints.up(theme.breakpoints.values.md + 32)]: {
-      display: "none",
-    },
-  },
-  sidebar: {
-    width: "200px",
-    [theme.breakpoints.up("sm")]: {
-      width: "250px",
-    },
-  },
-  logoName: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.5rem",
-    },
-  },
-  links: {
-    textDecoration: "none",
-    width: "100%",
-    fontSize: "1.2rem",
-    color: "black",
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
 const MyDrawer = ({ NavColor }) => {
   const classes = useStyles();
   const [Open, setOpen] = React.useState(false);
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={classNames(
-          classes.drawer,
-          NavColor === "white" ? "bg-light text-dark" : "bg-transparent"
-        )}
-      >
-        <Toolbar>
-          <Box display="flex" alignItems="center" style={{ flexGrow: 1 }}>
-            <Link
-              to="/"
-              style={{
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <HomeIcon
-                style={{
-                  fontSize: "2rem",
-                  marginRight: "0.5rem",
-                  color: NavColor === "white" ? "black" : "white",
-                }}
-              />
-              {NavColor === "white" ? (
-                <Typography
-                  variant="h4"
-                  style={{ color: "black" }}
-                  className={classes.logoName}
-                >
-                  Dream House
-                </Typography>
-              ) : (
-                <Typography
-                  variant="h4"
-                  style={{ color: "white" }}
-                  className={classes.logoName}
-                >
-                  Dream House
-                </Typography>
-              )}
-            </Link>
-          </Box>
+      {NavColor === "white" ? (
+        <WhiteNavDrawer NavColor={NavColor} setOpen={setOpen} />
+      ) : (
+        <TransparentNavDrawer NavColor={NavColor} setOpen={setOpen} />
+      )}
 
-          <Button size="large" color="inherit">
-            Login
-          </Button>
-          <IconButton
-            color="inherit"
-            className={classes.iconSpacing}
-            onClick={() => setOpen(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
       <SwipeableDrawer
         open={Open}
         onOpen={() => setOpen(true)}

@@ -8,7 +8,7 @@ const Navbar = ({ NavColor }) => {
       {NavColor === "white" ? (
         <WhiteNavbar NavColor={NavColor} />
       ) : (
-        <TransparentNavbar />
+        <TransparentNavbar NavColor={NavColor} />
       )}
     </>
   );

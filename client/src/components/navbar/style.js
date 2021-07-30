@@ -12,6 +12,9 @@ export const useStyles = makeStyles(
         display: "none",
       },
     },
+    whiteNav: {
+      backgroundColor: "pink !important",
+    },
     logoName: {
       [theme.breakpoints.down(theme.breakpoints.values.md + 181)]: {
         fontSize: "1.8rem",
