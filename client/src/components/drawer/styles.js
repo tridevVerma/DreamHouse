@@ -29,6 +29,11 @@ export const useStyles = makeStyles(
     nested: {
       paddingLeft: theme.spacing(4),
     },
+    logoutBtn: {
+      "&:hover": {
+        backgroundColor: "tomato",
+      },
+    },
   }),
   { index: 1 }
 );

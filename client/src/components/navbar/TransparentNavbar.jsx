@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useStyles } from "./style";
 import Submenu from "./Submenu";
 
 import classNames from "classnames";
-import { Button, Typography, Grow } from "@material-ui/core";
+import { Button, Typography, Grow, Dialog } from "@material-ui/core";
 import { Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
+import { userLogout } from "../../actions/userLogout";
+import { useDispatch } from "react-redux";
+
+import { openLoginDialog } from "../../actions/openLoginDialog";
+import { closeLoginDialog } from "../../actions/closeLoginDialog";
+import Login from "../login/Login";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -32,6 +41,30 @@ const TransparentNavbar = ({ NavColor }) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const dispatch = useDispatch();
+  const signInDialog = useSelector((state) => state.loginDialog);
+  const data = useSelector((state) => state.currentUser.user);
+  const [loginDialog, setLoginDialog] = React.useState(false);
+  const [showLogout, setshowLogout] = React.useState(false);
+  const openDialog = () => {
+    dispatch(openLoginDialog());
+  };
+
+  const closeDialog = useCallback(() => {
+    dispatch(closeLoginDialog());
+  }, [dispatch]);
+
+  const logout = () => {
+    dispatch(userLogout());
+  };
+
+  React.useEffect(() => {
+    setLoginDialog(signInDialog);
+    if (data.name) {
+      closeDialog();
+    }
+  }, [data.name, signInDialog, closeDialog]);
 
   return (
     <>
@@ -141,13 +174,27 @@ const TransparentNavbar = ({ NavColor }) => {
                 </li>
               </ul>
 
-              <Button
-                variant="contained"
-                className={classes.myBtn}
-                startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
-              >
-                Search
-              </Button>
+              {data.name ? (
+                <Button
+                  variant="text"
+                  className={classes.loginLogoutBtn}
+                  startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
+                  onMouseOver={() => setshowLogout(true)}
+                  onMouseOut={() => setshowLogout(false)}
+                  onClick={() => logout()}
+                >
+                  {showLogout ? "Logout" : data.name}
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  className={classes.myBtn}
+                  startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
+                  onClick={() => openDialog()}
+                >
+                  SignUp
+                </Button>
+              )}
             </div>
           </div>
         </nav>
@@ -159,6 +206,14 @@ const TransparentNavbar = ({ NavColor }) => {
         anchorEl={anchorEl}
         NavColor="transparent"
       />
+      <Dialog
+        open={loginDialog}
+        maxWidth="md"
+        fullWidth
+        onClose={() => logout()}
+      >
+        <Login />
+      </Dialog>
     </>
   );
 };

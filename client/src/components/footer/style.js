@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
   bg: {
     backgroundImage:
-      'url("https://cdn.pixabay.com/photo/2014/08/01/15/51/city-407703_960_720.jpg")',
+      'url("https://images.unsplash.com/photo-1467226632440-65f0b4957563?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1087&q=80")',
     backgroundPosition: "center",
     backgroundSize: "cover",
     height: "auto",

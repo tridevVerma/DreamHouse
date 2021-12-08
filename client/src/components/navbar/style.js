@@ -68,6 +68,22 @@ export const useStyles = makeStyles(
         padding: "0.5rem 1rem",
       },
     },
+    loginLogoutBtn: {
+      fontSize: "14px",
+      backgroundColor: "#3454d1",
+      padding: "0.75rem 2rem",
+      color: "white",
+      fontWeight: "bold",
+      border: "none",
+      borderRadius: "2px",
+      transition: "all 0.5s",
+      "&:hover": {
+        backgroundColor: "tomato",
+      },
+      [theme.breakpoints.down(theme.breakpoints.values.md + 181)]: {
+        padding: "0.5rem 1rem",
+      },
+    },
   }),
   { index: 1 }
 );

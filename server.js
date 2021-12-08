@@ -9,6 +9,9 @@ import propertiesRoute from "./src/routes/propertiesRoute.js";
 import newsRoute from "./src/routes/newsRoute.js";
 import detailsRoute from "./src/routes/detailsRoute.js";
 
+import registerRoute from "./src/routes/registerRoute.js";
+import loginRoute from "./src/routes/loginRoute.js";
+
 dotenv.config();
 
 const app = express();
@@ -16,6 +19,10 @@ const port = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/newUser", registerRoute);
+app.use("/login", loginRoute);
+
 app.use("/projects", propertiesRoute);
 app.use("/news", newsRoute);
 app.use("/details", detailsRoute);
