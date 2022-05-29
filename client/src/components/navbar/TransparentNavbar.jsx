@@ -7,6 +7,7 @@ import { Button, Typography, Grow, Dialog } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { userLogout } from "../../actions/userLogout";
 import { useDispatch } from "react-redux";
@@ -42,6 +43,7 @@ const TransparentNavbar = ({ NavColor }) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const signInDialog = useSelector((state) => state.loginDialog);
   const data = useSelector((state) => state.currentUser.user);
@@ -57,6 +59,7 @@ const TransparentNavbar = ({ NavColor }) => {
 
   const logout = () => {
     dispatch(userLogout());
+    history.push("/");
   };
 
   React.useEffect(() => {
@@ -128,16 +131,7 @@ const TransparentNavbar = ({ NavColor }) => {
                   </Link>
                   <ExpandMoreIcon className={classes.moreIcon} />
                 </li>
-                <li className={classNames(classes.navItem, "nav-item")}>
-                  <Link
-                    className={classNames(classes.navLinks, "nav-link")}
-                    to="/"
-                    onClick={openSubmenu}
-                  >
-                    Rent
-                  </Link>
-                  <ExpandMoreIcon className={classes.moreIcon} />
-                </li>
+
                 <li className={classNames(classes.navItem, "nav-item")}>
                   <Link
                     className={classNames(classes.navLinks, "nav-link")}
@@ -153,17 +147,22 @@ const TransparentNavbar = ({ NavColor }) => {
                     className={classNames(classes.navLinks, "nav-link")}
                     to="/projects"
                   >
-                    Projects
+                    Properties
                   </Link>
                 </li>
-                <li className={classNames(classes.navItem, "nav-item")}>
-                  <Link
-                    className={classNames(classes.navLinks, "nav-link")}
-                    to="/services"
-                  >
-                    Services
-                  </Link>
-                </li>
+                {data.signupAs === "seller" ? (
+                  <li className={classNames(classes.navItem, "nav-item")}>
+                    <Link
+                      className={classNames(classes.navLinks, "nav-link")}
+                      to="/services"
+                    >
+                      Services
+                    </Link>
+                  </li>
+                ) : (
+                  ""
+                )}
+
                 <li className={classNames(classes.navItem, "nav-item")}>
                   <Link
                     className={classNames(classes.navLinks, "nav-link")}
@@ -192,7 +191,7 @@ const TransparentNavbar = ({ NavColor }) => {
                   startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
                   onClick={() => openDialog()}
                 >
-                  SignUp
+                  SignIn
                 </Button>
               )}
             </div>

@@ -28,6 +28,20 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
     position: "relative",
   },
+  profile_img: {
+    width: "100%",
+    height: "400px",
+    objectFit: "cover",
+  },
+  profile_info: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    position: "relative",
+  },
+  heading: {
+    fontWeight: "bold",
+  },
   title: {
     textAlign: "center",
     fontSize: "6rem",
@@ -48,6 +62,15 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       marginBottom: "2rem",
     },
+  },
+  icons_box: {
+    display: "flex",
+  },
+  socialIcons: {
+    width: "2rem",
+    height: "2rem",
+    padding: "0.4rem",
+    margin: "auto 1rem",
   },
   goToTopBtn: {
     position: "fixed",

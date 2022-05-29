@@ -8,10 +8,11 @@ import loadPropertyDetails from "./src/controllers/loadingData/loadPropertyDetai
 import propertiesRoute from "./src/routes/propertiesRoute.js";
 import newsRoute from "./src/routes/newsRoute.js";
 import detailsRoute from "./src/routes/detailsRoute.js";
+import sellerRoute from "./src/routes/sellerRoute.js";
 
 import registerRoute from "./src/routes/registerRoute.js";
 import loginRoute from "./src/routes/loginRoute.js";
-
+import sellerDataRoute from "./src/routes/sellerDataRoute.js";
 dotenv.config();
 
 const app = express();
@@ -26,6 +27,8 @@ app.use("/login", loginRoute);
 app.use("/projects", propertiesRoute);
 app.use("/news", newsRoute);
 app.use("/details", detailsRoute);
+app.use("/seller", sellerRoute);
+app.use("/sellerData", sellerDataRoute);
 
 const URL = process.env.MONGODB_URL || process.env.DB_URL;
 

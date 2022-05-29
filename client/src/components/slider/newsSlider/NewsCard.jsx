@@ -31,8 +31,8 @@ const NewsCard = ({ news }) => {
       <Box className={classNames(classes.horizontalBetween, "p-3")}>
         <Box className={classes.horizontalBetween}>
           <Avatar
-            alt="Remy Sharp"
-            src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=644&q=80"
+            alt="publisher"
+            src="https://economictimes.indiatimes.com/blogs/wp-content/uploads/2014/09/Commentary.png"
             style={{ marginRight: "1rem" }}
           />
           <Typography variant="subtitle1" style={{ color: "#495057" }}>
@@ -42,7 +42,7 @@ const NewsCard = ({ news }) => {
         <Button
           variant="contained"
           style={{
-            backgroundColor: "#3454d1",
+            backgroundColor: "#018DB7",
             color: "white",
             borderRadius: "0px",
           }}

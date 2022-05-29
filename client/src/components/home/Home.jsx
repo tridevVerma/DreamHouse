@@ -85,8 +85,7 @@ const Home = ({ NavColor }) => {
             Find Your Dream House
           </Typography>
           <Typography variant="subtitle1" className={classes.mainContentPara}>
-            Your Property, Our Priority and From as low as $10 per day with
-            limited time offer discounts
+            Don't wait to buy a real estate, buy real estate and wait..
           </Typography>
           <Box className={classes.searchSelectBtnBox}>
             <Box className={classes.searchPlaceBox}>

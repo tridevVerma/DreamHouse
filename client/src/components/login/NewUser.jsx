@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import URL from "../../backendURL";
-import { TextField, Button, Typography, Box } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Radio,
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+} from "@material-ui/core";
 
 const NewUser = (props) => {
   const [User, setUser] = useState({
@@ -10,6 +19,11 @@ const NewUser = (props) => {
     mobileno: "",
     PWD: "",
     confirmPWD: "",
+    signupAs: "user",
+    officePhno: "",
+    officeAddress: "",
+    title: "",
+    image: "",
   });
   const [UserExistError, setUserExistError] = useState("");
   const [PasswordMatchError, setPasswordMatchError] = useState("");
@@ -21,6 +35,8 @@ const NewUser = (props) => {
     if (User.PWD === User.confirmPWD) {
       const { confirmPWD, ...userData } = User;
       try {
+        console.log("userDATA");
+        console.log(userData);
         await axios.post(URL + "/newUser", userData);
         props.setUserExist(true);
         alert("New User Created");
@@ -76,6 +92,68 @@ const NewUser = (props) => {
           value={User.mobileno}
           onChange={(e) => setUser({ ...User, mobileno: e.target.value })}
         />
+        <FormControl margin="normal">
+          <RadioGroup
+            row
+            aria-labelledby="demo-controlled-radio-buttons-group"
+            name="controlled-radio-buttons-group"
+            value={User.signupAs}
+            onChange={(e) => setUser({ ...User, signupAs: e.target.value })}
+          >
+            <FormControlLabel
+              value="user"
+              control={<Radio />}
+              label="user/buyer"
+            />
+            <FormControlLabel
+              value="seller"
+              control={<Radio />}
+              label="seller"
+            />
+          </RadioGroup>
+        </FormControl>
+        {User.signupAs === "seller" ? (
+          <>
+            <TextField
+              required
+              fullWidth
+              margin="normal"
+              label="Office Phone no"
+              type="number"
+              value={User.officePhno}
+              onChange={(e) => setUser({ ...User, officePhno: e.target.value })}
+            />
+            <TextField
+              required
+              fullWidth
+              margin="normal"
+              label="Office Address"
+              value={User.officeAddress}
+              onChange={(e) =>
+                setUser({ ...User, officeAddress: e.target.value })
+              }
+            />
+            <TextField
+              required
+              fullWidth
+              margin="normal"
+              label="Title"
+              value={User.title}
+              onChange={(e) => setUser({ ...User, title: e.target.value })}
+            />
+            <TextField
+              required
+              fullWidth
+              margin="normal"
+              label="Image"
+              value={User.image}
+              onChange={(e) => setUser({ ...User, image: e.target.value })}
+            />
+          </>
+        ) : (
+          ""
+        )}
+
         <TextField
           required
           fullWidth
@@ -94,6 +172,7 @@ const NewUser = (props) => {
           value={User.confirmPWD}
           onChange={(e) => setUser({ ...User, confirmPWD: e.target.value })}
         />
+
         {PasswordMatchError ? (
           <Typography
             variant="subtitle2"

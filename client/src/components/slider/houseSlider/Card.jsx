@@ -96,8 +96,8 @@ const Card = ({ house }) => {
       <Box className={classNames(classes.horizontalBetween, "p-3")}>
         <Box className={classes.horizontalBetween}>
           <Avatar
-            alt="Remy Sharp"
-            src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=644&q=80"
+            alt="seller image"
+            src={house.sellerImage}
             style={{ marginRight: "1rem" }}
           />
           <Typography variant="subtitle1" style={{ color: "#495057" }}>

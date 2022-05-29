@@ -12,6 +12,7 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
+import { sellerProperties } from "../../actions/sellerProperties";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -46,6 +47,7 @@ const UserData = (props) => {
     try {
       const userResult = await axios.post(URL + "/login", loginData);
       dispatch(userLogin(userResult.data));
+      dispatch(sellerProperties(userResult.data.name));
     } catch (error) {
       if (error.response && error.response.status === 403) {
         setpasswordError("Wrong Password Entered");

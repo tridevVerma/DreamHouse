@@ -7,7 +7,7 @@ import UserData from "./UserData";
 import NewUser from "./NewUser";
 
 const useStyles = makeStyles((theme) => ({
-  dialogBox: { height: "68vh", display: "flex" },
+  dialogBox: { height: "75vh", display: "flex" },
   left: {
     backgroundColor: theme.palette.primary.main,
     height: "100%",

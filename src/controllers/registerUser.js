@@ -11,6 +11,7 @@ const registerUser = async (req, res) => {
       return res.status(401).json("User already exists");
     }
 
+    console.log(req.body);
     //Hashing Password
     let { PWD, ...userData } = req.body;
     const salt = await bcrypt.genSalt(10);

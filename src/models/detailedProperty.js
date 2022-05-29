@@ -80,6 +80,10 @@ const detailedPropertySchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  sellerImage: {
+    type: String,
+    required: true,
+  },
 });
 
 const DetailedProperty = mongoose.model(

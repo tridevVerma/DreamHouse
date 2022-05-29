@@ -8,17 +8,17 @@ export const contactLinks = [
     icon: (
       <LocationOnIcon style={{ fontSize: "1.4rem", marginRight: "1rem" }} />
     ),
-    text: "214 West Arnold St. New York, NY 10002",
+    text: "Ranibagh , New Delhi, 110034",
   },
 
   {
     icon: <PhoneIcon style={{ fontSize: "1.4rem", marginRight: "1rem" }} />,
-    text: "(123) 345-6789",
+    text: "7376517415",
   },
 
   {
     icon: <PhoneIcon style={{ fontSize: "1.4rem", marginRight: "1rem" }} />,
-    text: "(+100) 123 456 7890",
+    text: "9758946238",
   },
 
   {
@@ -39,7 +39,6 @@ export const quickLinks = [
   "residential",
   "residential tower",
   "beverly hills",
-  "los angeles",
   "the beach",
   "property listing",
   "classic",

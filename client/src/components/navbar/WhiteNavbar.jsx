@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useStyles } from "./style";
 import Submenu from "./Submenu";
 
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { userLogout } from "../../actions/userLogout";
+
+import { openLoginDialog } from "../../actions/openLoginDialog";
+import { closeLoginDialog } from "../../actions/closeLoginDialog";
+import Login from "../login/Login";
+
 import classNames from "classnames";
-import { Button, Typography, Slide } from "@material-ui/core";
+import { Button, Typography, Slide, Dialog } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -12,6 +21,8 @@ import HomeIcon from "@material-ui/icons/Home";
 
 const WhiteNavbar = ({ NavColor }) => {
   const classes = useStyles();
+
+  const data = useSelector((state) => state.currentUser.user);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openSubmenu = (event) => {
@@ -32,6 +43,32 @@ const WhiteNavbar = ({ NavColor }) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const signInDialog = useSelector((state) => state.loginDialog);
+
+  const [loginDialog, setLoginDialog] = React.useState(false);
+  const [showLogout, setshowLogout] = React.useState(false);
+  const openDialog = () => {
+    dispatch(openLoginDialog());
+  };
+
+  const closeDialog = useCallback(() => {
+    dispatch(closeLoginDialog());
+  }, [dispatch]);
+
+  const logout = () => {
+    dispatch(userLogout());
+    history.push("/");
+  };
+
+  React.useEffect(() => {
+    setLoginDialog(signInDialog);
+    if (data.name) {
+      closeDialog();
+    }
+  }, [data.name, signInDialog, closeDialog]);
 
   return (
     <>
@@ -96,16 +133,7 @@ const WhiteNavbar = ({ NavColor }) => {
                   </Link>
                   <ExpandMoreIcon className={classes.moreIcon} />
                 </li>
-                <li className={classNames(classes.navItem, "nav-item")}>
-                  <Link
-                    className={classNames(classes.navLinks, "nav-link")}
-                    to="/"
-                    onClick={openSubmenu}
-                  >
-                    Rent
-                  </Link>
-                  <ExpandMoreIcon className={classes.moreIcon} />
-                </li>
+
                 <li className={classNames(classes.navItem, "nav-item")}>
                   <Link
                     className={classNames(classes.navLinks, "nav-link")}
@@ -121,17 +149,22 @@ const WhiteNavbar = ({ NavColor }) => {
                     className={classNames(classes.navLinks, "nav-link")}
                     to="/projects"
                   >
-                    Projects
+                    Properties
                   </Link>
                 </li>
-                <li className={classNames(classes.navItem, "nav-item")}>
-                  <Link
-                    className={classNames(classes.navLinks, "nav-link")}
-                    to="/services"
-                  >
-                    Services
-                  </Link>
-                </li>
+                {data.signupAs === "seller" ? (
+                  <li className={classNames(classes.navItem, "nav-item")}>
+                    <Link
+                      className={classNames(classes.navLinks, "nav-link")}
+                      to="/services"
+                    >
+                      Services
+                    </Link>
+                  </li>
+                ) : (
+                  ""
+                )}
+
                 <li className={classNames(classes.navItem, "nav-item")}>
                   <Link
                     className={classNames(classes.navLinks, "nav-link")}
@@ -142,13 +175,27 @@ const WhiteNavbar = ({ NavColor }) => {
                 </li>
               </ul>
 
-              <Button
-                variant="contained"
-                className={classes.myBtn}
-                startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
-              >
-                Search
-              </Button>
+              {data.name ? (
+                <Button
+                  variant="text"
+                  className={classes.loginLogoutBtn}
+                  startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
+                  onMouseOver={() => setshowLogout(true)}
+                  onMouseOut={() => setshowLogout(false)}
+                  onClick={() => logout()}
+                >
+                  {showLogout ? "Logout" : data.name}
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  className={classes.myBtn}
+                  startIcon={<AddCircleIcon style={{ fontSize: "14px" }} />}
+                  onClick={() => openDialog()}
+                >
+                  SignIn
+                </Button>
+              )}
             </div>
           </div>
         </nav>
@@ -160,6 +207,14 @@ const WhiteNavbar = ({ NavColor }) => {
         anchorEl={anchorEl}
         NavColor="white"
       />
+      <Dialog
+        open={loginDialog}
+        maxWidth="md"
+        fullWidth
+        onClose={() => logout()}
+      >
+        <Login />
+      </Dialog>
     </>
   );
 };

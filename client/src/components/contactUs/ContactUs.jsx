@@ -10,7 +10,14 @@ import {
   TextField,
   Grid,
   Button,
+  Box,
+  Link,
 } from "@material-ui/core";
+
+import FacebookIcon from "@material-ui/icons/Facebook";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import InstagramIcon from "@material-ui/icons/Instagram";
 
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
@@ -24,6 +31,73 @@ const ContactUs = ({ NavColor }) => {
     });
   };
 
+  const changeSocialIconColor = (event, color) => {
+    event.currentTarget.style.backgroundColor = "transparent";
+    event.currentTarget.style.color = color;
+    event.currentTarget.style.padding = "0.2rem";
+  };
+
+  const resetSocialIconColor = (event, color) => {
+    event.currentTarget.style.backgroundColor = color;
+    event.currentTarget.style.color = "#fff";
+    event.currentTarget.style.padding = "0.4rem";
+  };
+
+  const socialIcons = [
+    {
+      icon: (
+        <FacebookIcon
+          style={{
+            backgroundColor: "#3b5999",
+          }}
+          className={classes.socialIcons}
+          onMouseEnter={(event) => changeSocialIconColor(event, "#3b5999")}
+          onMouseLeave={(event) => resetSocialIconColor(event, "#3b5999")}
+        />
+      ),
+      address: "https://www.facebook.com/",
+    },
+    {
+      icon: (
+        <TwitterIcon
+          style={{
+            backgroundColor: "#55acee",
+          }}
+          className={classes.socialIcons}
+          onMouseEnter={(event) => changeSocialIconColor(event, "#55acee")}
+          onMouseLeave={(event) => resetSocialIconColor(event, "#55acee")}
+        />
+      ),
+      address: "https://twitter.com/?lang=en",
+    },
+    {
+      icon: (
+        <LinkedInIcon
+          style={{
+            backgroundColor: "#0077b5",
+          }}
+          className={classes.socialIcons}
+          onMouseEnter={(event) => changeSocialIconColor(event, "#0077b5")}
+          onMouseLeave={(event) => resetSocialIconColor(event, "#0077b5")}
+        />
+      ),
+      address: "https://www.linkedin.com/home",
+    },
+    {
+      icon: (
+        <InstagramIcon
+          style={{
+            backgroundColor: "#d91cac",
+          }}
+          className={classes.socialIcons}
+          onMouseEnter={(event) => changeSocialIconColor(event, "#d91cac")}
+          onMouseLeave={(event) => resetSocialIconColor(event, "#d91cac")}
+        />
+      ),
+      address: "https://www.instagram.com/",
+    },
+  ];
+
   return (
     <>
       <Navbar NavColor={NavColor} />
@@ -32,9 +106,58 @@ const ContactUs = ({ NavColor }) => {
       <div className={classes.bg}>
         <Container maxWidth="lg" className={classes.container}>
           <Typography variant="h1" color="initial" className={classes.title}>
-            Contact Us
+            Contact Agent
           </Typography>
         </Container>
+      </div>
+
+      <div className="container my-5">
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <img
+              src="https://thumbs.dreamstime.com/z/man-programmer-working-his-laptop-coding-programming-63779805.jpg"
+              alt="profile_img"
+              className={classes.profile_img}
+            />
+          </Grid>
+          <Grid item xs={12} md={6} className={classes.profile_info}>
+            <Typography variant="h4" color="initial">
+              Tridev / Prateek
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <span className={classes.heading}>Title : </span> Developers
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <span className={classes.heading}>Email : </span> tv@gmail.com
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <span className={classes.heading}>MobileNo-1 : </span> 8851691799
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <span className={classes.heading}>MobileNo-2 : </span> 7376517415
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <span className={classes.heading}>Office Address : </span>{" "}
+              Haiderpur, Delhi-110011
+            </Typography>
+
+            <Box mt={2} mb={4} className={classes.icons_box}>
+              {socialIcons.map((link, index) => (
+                <Link
+                  to={{ pathname: link.address }}
+                  target="_blank"
+                  key={index}
+                  style={{
+                    color: "#fff",
+                    marginRight: "1rem",
+                  }}
+                >
+                  {link.icon}
+                </Link>
+              ))}
+            </Box>
+          </Grid>
+        </Grid>
       </div>
 
       <div className="container my-5">
@@ -44,7 +167,7 @@ const ContactUs = ({ NavColor }) => {
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                   <TextField
-                    placeholder="Your Name Here.."
+                    placeholder="Your Name"
                     type="text"
                     required={true}
                     variant="outlined"
@@ -54,7 +177,7 @@ const ContactUs = ({ NavColor }) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <TextField
-                    placeholder="Your Email Here.."
+                    placeholder="Your Email"
                     type="email"
                     required={true}
                     variant="outlined"
@@ -64,8 +187,8 @@ const ContactUs = ({ NavColor }) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <TextField
-                    placeholder="Your Website Here.."
-                    type="url"
+                    placeholder="Your Mobile No."
+                    type="number"
                     required={true}
                     variant="outlined"
                     className={classes.textFields}
@@ -74,7 +197,7 @@ const ContactUs = ({ NavColor }) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <TextField
-                    placeholder="Your Subject Here.."
+                    placeholder="Your Subject"
                     type="text"
                     required={true}
                     variant="outlined"
@@ -84,7 +207,7 @@ const ContactUs = ({ NavColor }) => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    placeholder="Your Message Here.."
+                    placeholder="Your Message"
                     multiline
                     rows={6}
                     required={true}

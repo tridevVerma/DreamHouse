@@ -1,5 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+
+import { getSeller } from "../../actions/getSeller";
 
 import Navbar from "../navbar/Navbar";
 import MyDrawer from "../drawer/MyDrawer";
@@ -12,7 +17,7 @@ import Features from "./Features";
 import FloorPlans from "./FloorPlans";
 import Location from "./Location";
 import { useStyles } from "./style";
-import { Container, Typography, Box } from "@material-ui/core";
+import { Container, Typography, Box, Button } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -20,6 +25,8 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 const Details = ({ NavColor }) => {
   const details = useSelector((state) => state.detailedProperty.data);
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const imageSliderData = [
     details.mainImage,
@@ -47,6 +54,11 @@ const Details = ({ NavColor }) => {
       title: "Bedroom",
     },
   ];
+
+  const getSellerInfo = () => {
+    dispatch(getSeller(details.seller));
+    history.push("/profile");
+  };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -106,13 +118,25 @@ const Details = ({ NavColor }) => {
           </Box>
         </Container>
 
-        <Description desc={details.desc} />
+        <Description desc={details.desc} name={details.seller} />
         <PropertyDetails {...details} />
         <Features />
         <FloorPlans />
         <Location />
       </Box>
 
+      <Container>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth
+          className={classes.agentBtn}
+          onClick={() => getSellerInfo()}
+        >
+          Contact Agent
+        </Button>
+      </Container>
       <Footer />
       <button
         className={classes.goToTopBtn}

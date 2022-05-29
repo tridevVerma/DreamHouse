@@ -1,5 +1,8 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { useStyles } from "./styles";
 import WhiteNavDrawer from "./WhiteNavDrawer";
 import TransparentNavDrawer from "./TransparentNavDrawer";
@@ -11,7 +14,7 @@ import HomeIcon from "@material-ui/icons/Home";
 const MyDrawer = ({ NavColor }) => {
   const classes = useStyles();
   const [Open, setOpen] = React.useState(false);
-
+  const data = useSelector((state) => state.currentUser.user);
   return (
     <>
       {NavColor === "white" ? (
@@ -65,11 +68,16 @@ const MyDrawer = ({ NavColor }) => {
               Projects
             </Link>
           </ListItem>
-          <ListItem button={true} onClick={() => setOpen(false)}>
-            <Link to="/services" className={classes.links}>
-              Services
-            </Link>
-          </ListItem>
+          {data.signupAs === "seller" ? (
+            <ListItem button={true} onClick={() => setOpen(false)}>
+              <Link to="/services" className={classes.links}>
+                Services
+              </Link>
+            </ListItem>
+          ) : (
+            ""
+          )}
+
           <ListItem button={true} onClick={() => setOpen(false)}>
             <Link to="/contact" className={classes.links}>
               Contact Us

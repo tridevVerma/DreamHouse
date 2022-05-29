@@ -11,6 +11,10 @@ const newUserSchema = mongoose.Schema({
       message: "{VALUE} is not a valid name!",
     },
   },
+  signupAs: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -43,6 +47,18 @@ const newUserSchema = mongoose.Schema({
       },
       message: "{VALUE} is not a valid password!",
     },
+  },
+  officePhno: {
+    type: Number,
+  },
+  officeAddress: {
+    type: String,
+  },
+  title: {
+    type: String,
+  },
+  image: {
+    type: String,
   },
 });
 

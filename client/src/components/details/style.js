@@ -131,4 +131,10 @@ export const useStyles = makeStyles((theme) => ({
     height: "40px",
     boxShadow: theme.shadows[6],
   },
+
+  agentBtn: {
+    marginBottom: "2rem",
+    height: "3rem",
+    fontSize: "1.2rem",
+  },
 }));

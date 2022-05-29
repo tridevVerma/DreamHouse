@@ -1,11 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { propertyDetails } from "../../actions/propertyDetails";
+import { removeProperty } from "../../actions/removeProperty";
+import { sellerProperties } from "../../actions/sellerProperties";
 
 import classNames from "classnames";
-import { Box, Typography, Avatar } from "@material-ui/core";
+import { Box, Typography, Avatar, Button } from "@material-ui/core";
 import { useStyles } from "./style";
 
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -13,14 +16,23 @@ import BathtubIcon from "@material-ui/icons/Bathtub";
 import HotelIcon from "@material-ui/icons/Hotel";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Card = ({ house }) => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.currentUser.user);
+
   const showDetails = () => {
     dispatch(propertyDetails(house.propertyID));
     history.push("/details");
+  };
+
+  const remove = async () => {
+    await dispatch(removeProperty(house.propertyID));
+    dispatch(sellerProperties(data.name));
   };
   const houseData = [
     {
@@ -45,20 +57,35 @@ const Card = ({ house }) => {
     },
   ];
   return (
-    <div className={classNames(classes.card, "card")} onClick={showDetails}>
+    <div className={classNames(classes.card, "card")}>
       <Typography variant="subtitle2" className={classes.ribbon}>
         {house.tag}
       </Typography>
       <img
-        src={house.image}
+        src={house.mainImage}
         className={classNames(classes.image, "card-img-top")}
         alt="img"
+        onClick={showDetails}
       />
 
       <div className="card-body">
-        <Typography variant="subtitle2" className={classes.type} gutterBottom>
-          {house.type}
-        </Typography>
+        <Box className={classes.remove}>
+          <Typography variant="subtitle2" className={classes.type} gutterBottom>
+            {house.type}
+          </Typography>
+          <Button
+            color="secondary"
+            variant="contained"
+            endIcon={<DeleteIcon />}
+            className={classes.removeBtn}
+            onClick={() => {
+              remove();
+            }}
+          >
+            Remove
+          </Button>
+        </Box>
+
         <h5 className="card-title" style={{ color: "#002247" }}>
           {house.title}
         </h5>
@@ -92,8 +119,8 @@ const Card = ({ house }) => {
       <Box className={classNames(classes.horizontalBetween, "p-3")}>
         <Box className={classes.horizontalBetween}>
           <Avatar
-            alt="seller Image"
-            src={house.sellerImage}
+            alt="Remy Sharp"
+            src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=644&q=80"
             style={{ marginRight: "1rem" }}
           />
           <Typography variant="subtitle1" style={{ color: "#495057" }}>
