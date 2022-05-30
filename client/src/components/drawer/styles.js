@@ -26,6 +26,12 @@ export const useStyles = makeStyles(
       fontSize: "1.2rem",
       color: "black",
     },
+    servicesLinks: {
+      textDecoration: "none",
+      width: "100%",
+      fontSize: "1rem",
+      color: "black",
+    },
     nested: {
       paddingLeft: theme.spacing(4),
     },

@@ -20,8 +20,6 @@ const Profile = (props) => {
   const user = useSelector((state) => state.currentUser.user);
   const data = useSelector((state) => state.sellerData.data);
 
-  console.log("data is ");
-  console.log(data);
   const changeSocialIconColor = (event, color) => {
     event.currentTarget.style.backgroundColor = "transparent";
     event.currentTarget.style.color = color;

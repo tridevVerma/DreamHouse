@@ -18,8 +18,8 @@ const Card = ({ house }) => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  const showDetails = () => {
-    dispatch(propertyDetails(house.propertyID));
+  const showDetails = async () => {
+    await dispatch(propertyDetails(house.propertyID));
     history.push("/details");
   };
   const houseData = [

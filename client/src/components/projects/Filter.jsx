@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Slider, withStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByProperties } from "../../actions/filterByProperties";
 import { useStyles } from "./style";
+
+import { getAllProperties } from "../../actions/loadAllProperties";
+import { filterByProperties } from "../../actions/filterByProperties";
 
 import { data } from "./data";
 import { locations } from "../../asset/locationsData";
@@ -107,7 +109,7 @@ const Filter = () => {
     if (Location) queriesArr.push(`checked${Location}`);
 
     if (tag) queriesArr.push(`checkedtag${tag}`);
-
+    dispatch(getAllProperties());
     dispatch(filterByProperties(queriesArr));
     history.push(`/projects/filters`);
   };

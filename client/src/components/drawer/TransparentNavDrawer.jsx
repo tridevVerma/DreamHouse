@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { userLogout } from "../../actions/userLogout";
-import { useDispatch } from "react-redux";
 
 import { Dialog } from "@material-ui/core";
 
@@ -26,7 +27,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 const TransparentNavDrawer = ({ NavColor, setOpen }) => {
   const classes = useStyles();
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const signInDialog = useSelector((state) => state.loginDialog);
   const data = useSelector((state) => state.currentUser.user);
   const [loginDialog, setLoginDialog] = React.useState(false);
@@ -41,6 +44,7 @@ const TransparentNavDrawer = ({ NavColor, setOpen }) => {
 
   const logout = () => {
     dispatch(userLogout());
+    history.push("/");
   };
 
   React.useEffect(() => {

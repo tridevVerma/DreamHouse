@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { propertyDetails } from "../../actions/propertyDetails";
 import { removeProperty } from "../../actions/removeProperty";
 import { sellerProperties } from "../../actions/sellerProperties";
+import { getAllProperties } from "../../actions/loadAllProperties";
 
 import classNames from "classnames";
 import { Box, Typography, Avatar, Button } from "@material-ui/core";
@@ -33,6 +34,7 @@ const Card = ({ house }) => {
   const remove = async () => {
     await dispatch(removeProperty(house.propertyID));
     dispatch(sellerProperties(data.name));
+    dispatch(getAllProperties());
   };
   const houseData = [
     {
