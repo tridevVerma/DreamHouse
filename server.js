@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { MONGODB_URL } from "./db.js";
 
 import loadAllProperties from "./src/controllers/loadingData/loadAllProperties.js";
 import loadPropertyDetails from "./src/controllers/loadingData/loadPropertyDetails.js";
@@ -16,7 +17,7 @@ import sellerDataRoute from "./src/routes/sellerDataRoute.js";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = 8000;
 
 app.use(cors());
 app.use(express.json());
@@ -30,14 +31,12 @@ app.use("/details", detailsRoute);
 app.use("/seller", sellerRoute);
 app.use("/sellerData", sellerDataRoute);
 
-const URL = process.env.MONGODB_URL || process.env.DB_URL;
-
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("client/build"));
 }
 
 mongoose
-  .connect(URL, {
+  .connect(MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

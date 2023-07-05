@@ -17,7 +17,7 @@ export const allNewsData = [
     text: "The MD of the insurance behemoth, Siddhartha Mohanty, who was in city for IPO roadshow of LIC, said that state-run insurer is gradually taking back its properties.",
     seller: "Economic Times",
     image:
-      "https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1611077892000/photosp/85ffe92d-cda7-49d9-8142-726fb1701754/stock-photo-indian-men-with-smile-85ffe92d-cda7-49d9-8142-726fb1701754.jpg",
+      "https://static.pbcdn.in/cdn/images/bu/investment/lic-banner-rhs.png",
   },
   {
     title: "Chandigarh housing board eyeing big bucks at IT Park",

@@ -122,7 +122,7 @@ const ContactUs = ({ NavColor }) => {
           </Grid>
           <Grid item xs={12} md={6} className={classes.profile_info}>
             <Typography variant="h4" color="initial">
-              Tridev / Prateek
+              Tridev Verma
             </Typography>
             <Typography variant="body1" color="initial">
               <span className={classes.heading}>Title : </span> Developers
@@ -131,10 +131,7 @@ const ContactUs = ({ NavColor }) => {
               <span className={classes.heading}>Email : </span> tv@gmail.com
             </Typography>
             <Typography variant="body1" color="initial">
-              <span className={classes.heading}>MobileNo-1 : </span> 8851691799
-            </Typography>
-            <Typography variant="body1" color="initial">
-              <span className={classes.heading}>MobileNo-2 : </span> 7376517415
+              <span className={classes.heading}>Mobile No : </span> 8851691799
             </Typography>
             <Typography variant="body1" color="initial">
               <span className={classes.heading}>Office Address : </span>{" "}
@@ -209,7 +206,7 @@ const ContactUs = ({ NavColor }) => {
                   <TextField
                     placeholder="Your Message"
                     multiline
-                    rows={6}
+                    minRows={6}
                     required={true}
                     variant="outlined"
                     className={classes.textFields}
