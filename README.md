@@ -52,3 +52,18 @@ Real Estate Mern Website
   cd client/
   npm start
   ```
+
+### Built With
+
+Technology Stack to build this Application
+* MongoDB
+* Express
+* NodeJS
+* Validator
+* bcrypt
+* React JS
+* Material UI
+* Axios
+* React-router-dom
+* redux
+* Slick-carousel
